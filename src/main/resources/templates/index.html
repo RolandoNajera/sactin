@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Sactin</title>
+</head>
+<body>
+<h1 th:text="${initMessage}">Inicio de Aplicación</h1>
+
+<ul>
+    <li>
+        <a th:href="@{/app/message(salutation='Mi mensaje')}">/app/message?salutation=Mi mensaje</a>
+    </li>
+    <li>
+        <a th:href="@{/app/mix-params(salutation='Mi mensaje', number = 23)}">/app/mix-params?salutation=Mi mensaje&number=23</a>
+    </li>
+</ul>
+</body>
+</html>
