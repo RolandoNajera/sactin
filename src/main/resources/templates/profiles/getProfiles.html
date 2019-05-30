@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}"></title>
+</head>
+<body>
+    <a th:href="@{create-profile}">Nuevo Cliente</a>
+    <div th:if="${profiles.isEmpty()}">No hay usuarios en la lista</div>
+    <div th:if="${!profiles.isEmpty()}">
+        <table>
+            <thead><tr span="3">Usuarios Registrados</tr>
+            <tr>
+                <td>Nombre</td>
+                <td>Apellido</td>
+                <td>Correo</td>
+            </tr>
+                </thead>
+            <tbody>
+                <tr th:each="profile: ${profiles}">
+                    <td th:text="${profile.name}"></td>
+                    <td th:text="${profile.mail}"></td>
+                    <td th:text="${profile.phone}"></td>
+                </tr>
+            </tbody>
+            <tfoot>Total de registros: <span th:text="${profiles.size()}"></span></tfoot>
+        </table>
+    </div>
+</body>
+</html>
