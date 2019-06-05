@@ -5,5 +5,19 @@
     <title>SACTIN</title>
 </head>
 <body>
+<h1>Nueva Nota</h1>
+<form action="#" th:action="@{/profiles/profileKey/notes}" th:object="${newNote}" method="post">
+    Número nota
+    <input type="text" th:field="*{key}"><br>
+    Fecha Entrada
+    <input type="text" th:field="*{inputDate}"><br>
+    Fecha Salida
+    <input type="text" th:field="*{outputDate}"><br>
+    Monto total
+    <input type="text" th:field="*{totalAmount}"><br>
+    Comentarios
+    <input type="text" th:field="*{comments}"><br>
+    <input type="submit">
+</form>
 </body>
 </html>
