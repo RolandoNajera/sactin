@@ -6,30 +6,26 @@
 <header th:replace="layout/layout :: header"></header>
 <div class="container">
     <h1>Nuevo Cliente</h1>
-    <form action="#" th:action="@{/profiles}" th:object="${newProfile}" method="post">
-        <table class="table table-bordered">
-            <tr>
-                <td>Nombre</td>
-                <td><input type="text" th:field="*{name}"></td>
-            </tr>
-            <tr>
-                <td>Correo</td>
-                <td><input type="text" th:field="*{mail}"></td>
-            </tr>
-            <tr>
-                <td>Teléfono</td>
-                <td><input type="text" th:field="*{phone}"></td>
-            </tr>
-            <tr>
-                <td>Dirección</td>
-                <td><input type="text" th:field="*{address}"></td>
-            </tr>
-            <tfoot>
-            <input type="hidden" th:field="*{key}">
-            <input type="hidden" th:field="*{createAt}">
-            <input type="submit" class="btn btn-primary">
-            </tfoot>
-        </table>
+    <form th:action="@{/profiles}" th:object="${newProfile}" th:method="post">
+        <div class="form-group">
+            <label for="name">Nombre</label>
+            <input th:field="*{completeName}" type="text" class="form-control" id="name" placeholder="Nombre completo">
+        </div>
+        <div class="form-group">
+            <label for="email">Correo</label>
+            <input th:field="*{mail}" type="email" class="form-control" id="email" placeholder="Correo electrónico">
+        </div>
+        <div class="form-group">
+            <label for="phone">Teléfono</label>
+            <input th:field="*{phone}" type="text" class="form-control" id="phone" placeholder="Teléfono celular">
+        </div>
+        <div class="form-group">
+            <label for="address">Dirección</label>
+            <input th:field="*{address}" type="text" class="form-control" id="address" placeholder="Dirección completa">
+        </div>
+        <input type="hidden" th:field="*{id}"><br>
+        <input type="hidden" th:field="*{createAt}"><br>
+        <input type="submit" class="btn btn-primary" value="Crear">
     </form>
 </div>
 <footer th:replace="layout/layout :: footer"></footer>

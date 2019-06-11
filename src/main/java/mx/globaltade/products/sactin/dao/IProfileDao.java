@@ -7,8 +7,8 @@ import java.util.List;
 public interface IProfileDao {
 
     List<Profile> getAll();
-    Profile getProfile(String key);
+    Profile getProfile(Long key);
     Profile createProfile(Profile profile);
     Profile updateProfile(Profile profile);
-    boolean deleteProfile(String key);
+    boolean deleteProfile(Long key);
 }

@@ -1,6 +1,7 @@
 package mx.globaltade.products.sactin.controllers;
 
 import mx.globaltade.products.sactin.models.Profile;
+import mx.globaltade.products.sactin.services.INoteService;
 import mx.globaltade.products.sactin.services.IProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +19,9 @@ public class ProfilesController {
     @Autowired
     public IProfileService profileService;
 
+    @Autowired
+    public INoteService noteService;
+
     @RequestMapping(value = "/profiles", method = RequestMethod.GET)
     public String getProfiles(@RequestParam(name = "name", required = false) String name, Model model) {
         model.addAttribute("profiles", profileService.getProfiles());
@@ -27,26 +31,28 @@ public class ProfilesController {
 
     @RequestMapping(value = "/profiles", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String createProfile(Profile profile, Model model) {
-        model.addAttribute("profile", profileService.createProfile(profile));
+        profileService.createProfile(profile);
+        model.addAttribute("profiles", profileService.getProfiles());
+        return "profiles/getProfiles";
+    }
+
+    @RequestMapping(value = "/profiles/{id}", method = RequestMethod.GET)
+    public String getProfile(@PathVariable(name = "id") Long id, Model model) {
+        model.addAttribute("profile", profileService.getProfile(id));
+        model.addAttribute("notes", noteService.getNotesByProfile(id));
         return "profiles/detailProfile";
     }
 
-    @RequestMapping(value = "/profiles/{key}", method = RequestMethod.GET)
-    public String getProfile(@PathVariable(name = "key") String key, Model model) {
-        model.addAttribute("profile", profileService.getProfile(key));
-        return "profiles/detailProfile";
+    @RequestMapping(value = "/profiles/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String updateProfile(@PathVariable(name = "id") Long id, Profile profile, Model model) {
+        profileService.updateProfile(profile);
+        model.addAttribute("profiles", profileService.getProfiles());
+        return "profiles/getProfiles";
     }
 
-    @RequestMapping(value = "/profiles/{key}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String updateProfile(@PathVariable(name = "key") String key, Profile profile, Model model) {
-        model.addAttribute("profile", profileService.updateProfile(profile));
-        return "profiles/detailProfile";
-    }
-
-    @RequestMapping(value = "/profiles/{key}", method = RequestMethod.DELETE)
-    public String deleteProfile(@PathVariable(name = "key") String key, Model model) {
-        Boolean status = profileService.deleteProfile(key);
-        model.addAttribute("deleted", status);
+    @RequestMapping(value = "/profiles/{id}", method = RequestMethod.DELETE)
+    public String deleteProfile(@PathVariable(name = "id") Long id, Model model) {
+        Boolean status = profileService.deleteProfile(id);
         model.addAttribute("profiles", profileService.getProfiles());
         return "profiles/getProfiles";
     }
@@ -57,10 +63,16 @@ public class ProfilesController {
         return "profiles/newProfile";
     }
 
-    @RequestMapping(value = "/profiles/{key}/update-profile", method = RequestMethod.GET)
-    public String initUpdateProfile(@PathVariable(name = "key") String key, Model model) {
-        model.addAttribute("updateProfile", profileService.getProfile(key));
+    @RequestMapping(value = "/profiles/{id}/update-profile", method = RequestMethod.GET)
+    public String initUpdateProfile(@PathVariable(name = "id") Long id, Model model) {
+        model.addAttribute("updateProfile", profileService.getProfile(id));
         return "profiles/updateProfile";
+    }
+
+    @RequestMapping(value = "/profiles/{id}/delete-profile", method = RequestMethod.GET)
+    public String initDeleteProfile(@PathVariable(name = "id") Long id, Model model) {
+        model.addAttribute("deleteProfile", profileService.getProfile(id));
+        return "profiles/deleteProfile";
     }
 
 }

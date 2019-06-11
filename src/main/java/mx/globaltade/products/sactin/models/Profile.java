@@ -1,12 +1,10 @@
 package mx.globaltade.products.sactin.models;
 
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "profiles")
@@ -16,9 +14,9 @@ public class Profile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long key;
+    private Long id;
 
-    private String name;
+    private String completeName;
 
     private String mail;
 
@@ -28,33 +26,36 @@ public class Profile {
 
     private String createAt;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "profile")
+    private List<Note> notes;
+
     public Profile() {
         super();
     }
 
-    public Profile(Long key, String name, String mail, String phone, String address, String createAt) {
-        this.key = key;
-        this.name = name;
+    public Profile(Long id, String name, String mail, String phone, String address, String createAt) {
+        this.id = id;
+        this.completeName = completeName;
         this.mail = mail;
         this.phone = phone;
         this.address = address;
         this.createAt = createAt;
     }
 
-    public Long getKey() {
-        return key;
+    public Long getId() {
+        return id;
     }
 
-    public void setKey(Long key) {
-        this.key = key;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getCompleteName() {
+        return completeName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCompleteName(String completeName) {
+        this.completeName = completeName;
     }
 
     public String getMail() {
@@ -95,11 +96,19 @@ public class Profile {
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
     }
 
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
+    }
+
     @Override
     public String toString() {
         return "Profile{" +
-                "key='" + key + '\'' +
-                ", name='" + name + '\'' +
+                "id='" + id + '\'' +
+                ", completeName='" + completeName + '\'' +
                 ", mail='" + mail + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +

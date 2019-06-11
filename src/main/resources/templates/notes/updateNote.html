@@ -5,8 +5,9 @@
 <body>
 <header th:replace="layout/layout :: header"></header>
 <div class="container">
-    <h1>Nueva nota</h1>
-    <form th:action="@{/profiles/{id}/notes(id=${profile.id})}" th:object="${newNote}" th:method="post">
+    <h1>Actualizar Nota</h1>
+    <form th:action="@{/profiles/{id}/notes/{note-id}(id=${profile.id}, note-id=${updateNote.id})}"
+          th:object="${updateNote}" th:method="put">
         <div class="form-group">
             <label for="noteNumber">Número Nota</label>
             <input th:field="*{noteNumber}" type="text" class="form-control" id="noteNumber">
@@ -27,8 +28,9 @@
             <label for="comments">Comentario</label>
             <input th:field="*{comments}" type="text" class="form-control" id="comments" placeholder="Algún comentario">
         </div>
-        <input type="hidden" th:field="*{createAt}">
-        <input type="submit" class="btn btn-primary" value="Crear">
+        <input type="hidden" th:field="*{id}"><br>
+        <input type="hidden" th:field="*{createAt}"><br>
+        <input type="submit" class="btn btn-primary" value="Actualizar">
     </form>
 </div>
 <footer th:replace="layout/layout :: footer"></footer>

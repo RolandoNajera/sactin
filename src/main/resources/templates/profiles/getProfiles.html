@@ -5,32 +5,35 @@
 <body>
 <header th:replace="layout/layout :: header"></header>
 <div class="container">
-    <a th:href="@{create-profile}">Nuevo Cliente</a>
+    <a th:href="@{/profiles/create-profile}" class="btn btn-primary btn-lg">Nuevo Cliente</a>
     <div th:if="${profiles.isEmpty()}">No hay usuarios en la lista</div>
     <div th:if="${!profiles.isEmpty()}">
-        <table class="table table-bordered">
+        <table class="table">
             <thead>
-            <tr span="3">Usuarios Registrados</tr>
             <tr>
-                <td># Cliente</td>
-                <td>Nombre</td>
-                <td>Apellido</td>
-                <td>Correo</td>
-                <td>Dirección</td>
-                <td>Eliminar</td>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">Acciones</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="profile: ${profiles}">
-                <td th:text="${profile.key}"><a th:href="@{/profiles/profile.key}"></a></td>
-                <td th:text="${profile.name}"></td>
+                <th th:text="${profile.id}" scope="row"></th>
+                <td><a th:href="@{/profiles/{id}(id=${profile.id})}"><span th:text="${profile.completeName}"></span></a></td>
                 <td th:text="${profile.mail}"></td>
                 <td th:text="${profile.phone}"></td>
                 <td th:text="${profile.address}"></td>
-                <td><a th:href="@{/profiles/profile.key}">eliminar</a></td>
+                <td><a th:href="@{/profiles/{id}/update-profile(id=${profile.id})}"><ion-icon name="create"></ion-icon></a>
+                    <a th:href="@{/profiles/{id}/delete-profile(id=${profile.id})}"><ion-icon name="trash"></ion-icon></a></td>
+            </tr>
+            <tr class="bg-success">
+                <td colspan="2">Total de registros</td>
+                <td colspan="4" th:text="${profiles.size()}"></td>
             </tr>
             </tbody>
-            <tfooter>Total de registros: <span th:text="${profiles.size()}"></span></tfooter>
         </table>
     </div>
 </div>

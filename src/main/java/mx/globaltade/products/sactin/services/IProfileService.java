@@ -9,7 +9,7 @@ public interface IProfileService {
     public Profile createProfile(Profile newProfile);
     public Profile updateProfile(Profile profile);
     public List<Profile> getProfiles();
-    public Profile getProfile(String profileKey);
-    public boolean deleteProfile(String profileKey);
+    public Profile getProfile(Long profileKey);
+    public boolean deleteProfile(Long profileKey);
 
 }

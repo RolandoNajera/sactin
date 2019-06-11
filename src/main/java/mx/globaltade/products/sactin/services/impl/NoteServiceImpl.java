@@ -1,7 +1,11 @@
 package mx.globaltade.products.sactin.services.impl;
 
+import mx.globaltade.products.sactin.dao.INoteDao;
 import mx.globaltade.products.sactin.models.Note;
+import mx.globaltade.products.sactin.models.Profile;
 import mx.globaltade.products.sactin.services.INoteService;
+import mx.globaltade.products.sactin.services.IProfileService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,44 +14,38 @@ import java.util.List;
 @Service("noteService")
 public class NoteServiceImpl implements INoteService {
 
+    @Autowired
+    private INoteDao noteDao;
+
     @Override
     public Note createNote(Note newNote) {
-        newNote.setKey(Math.random() + "");
-        return newNote;
+        return noteDao.createNote(newNote);
     }
 
     @Override
     public Note updateNote(Note note) {
-        note.getKey();
-        return note;
+        return noteDao.updateNote(note);
     }
 
     @Override
     public List<Note> getNotes() {
-        return populateNotes();
+        return noteDao.getNotes();
     }
 
     @Override
-    public List<Note> getNotesByProfile(String profileKey) {
-        return populateNotes();
+    public List<Note> getNotesByProfile(Long profileKey) {
+        return noteDao.getNotesByProfile(profileKey);
     }
 
     @Override
-    public Note getNote(String noteKey) {
-        return new Note(Math.random() + "","2019/08/23 12:40:00","2019/08/25 12:40:00","235.50", "Comentario 1");
+    public Note getNote(Long noteKey) {
+        return noteDao.getNote(noteKey);
     }
 
     @Override
-    public boolean deleteNote(String noteKey) {
-        return false;
+    public boolean deleteNote(Long noteKey) {
+        return noteDao.deleteNote(noteKey);
     }
 
-    private List<Note> populateNotes() {
-        List<Note> notes = new ArrayList<Note>();
-        notes.add(new Note(Math.random() + "","2019/08/23 12:40:00","2019/08/25 12:40:00","235.50", "Comentario 1"));
-        notes.add(new Note(Math.random() + "","2019/10/21 12:40:00","2019/08/22 12:40:00","450.50", "Comentario 2"));
-        notes.add(new Note(Math.random() + "","2019/09/12 12:40:00","2019/08/15 12:40:00","135.50", "Comentario 3"));
-        return notes;
-    }
 
 }

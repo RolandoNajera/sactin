@@ -23,8 +23,8 @@ public class ProfileDaoImpl implements IProfileDao {
 
     @Transactional(readOnly = true)
     @Override
-    public Profile getProfile(String key) {
-        return em.find(Profile.class, key);
+    public Profile getProfile(Long id) {
+        return em.find(Profile.class, id);
     }
 
     @Transactional
@@ -43,8 +43,8 @@ public class ProfileDaoImpl implements IProfileDao {
 
     @Transactional
     @Override
-    public boolean deleteProfile(String key) {
-        em.remove(em.find(Profile.class, key));
+    public boolean deleteProfile(Long id) {
+        em.remove(em.find(Profile.class, id));
         return true;
     }
 }

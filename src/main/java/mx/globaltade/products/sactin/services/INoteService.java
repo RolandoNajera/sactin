@@ -9,8 +9,8 @@ public interface INoteService {
     public Note createNote(Note newNote);
     public Note updateNote(Note note);
     public List<Note> getNotes();
-    public List<Note> getNotesByProfile(String profileKey);
-    public Note getNote(String noteKey);
-    public boolean deleteNote(String noteKey);
+    public List<Note> getNotesByProfile(Long profileKey);
+    public Note getNote(Long noteKey);
+    public boolean deleteNote(Long noteKey);
 
 }

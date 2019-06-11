@@ -6,7 +6,6 @@ import mx.globaltade.products.sactin.services.IProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service("profileService")
@@ -22,7 +21,8 @@ public class ProfileServiceImpl implements IProfileService {
 
     @Override
     public Profile updateProfile(Profile profile) {
-        return profile;
+
+        return profileDao.updateProfile(profile);
     }
 
     @Override
@@ -31,14 +31,14 @@ public class ProfileServiceImpl implements IProfileService {
     }
 
     @Override
-    public Profile getProfile(String profileKey) {
+    public Profile getProfile(Long profileKey) {
 
         return profileDao.getProfile(profileKey);
     }
 
     @Override
-    public boolean deleteProfile(String profileKey) {
-        return true;
+    public boolean deleteProfile(Long profileKey) {
+        return profileDao.deleteProfile(profileKey);
     }
 
 }
