@@ -24,8 +24,11 @@ public class ProfilesController {
 
     @RequestMapping(value = "/profiles", method = RequestMethod.GET)
     public String getProfiles(@RequestParam(name = "name", required = false) String name, Model model) {
+        System.out.println("llega aquí");
         model.addAttribute("profiles", profileService.getProfiles());
+        System.out.println("llega aquí 2");
         model.addAttribute("title", title);
+        System.out.println("llega aquí 3");
         return "profiles/getProfiles";
     }
 
