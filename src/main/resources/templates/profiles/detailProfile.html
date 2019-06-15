@@ -5,37 +5,49 @@
 <body>
 <header th:replace="layout/layout :: header"></header>
 <div class="container">
-    <h3 th:text="${profile.completeName}"> - <span th:text="${profile.phone}"></span></h3>
-    <a th:href="@{/profiles/{id}/notes/new-note(id=${profile.id})}" class="btn btn-primary btn-lg">Nueva Nota</a>
-    <div th:if="${notes.isEmpty()}">No hay notas del usuario</div>
-    <div th:if="${!notes.isEmpty()}">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">Numero Nota</th>
-                <th scope="col">Fecha Entrada</th>
-                <th scope="col">Fecha Salida</th>
-                <th scope="col">Monto Total</th>
-                <th scope="col">Comentario</th>
-                <th scope="col">Acciones</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="note: ${notes}">
-                <th th:text="${note.noteNumber}" scope="row"></th>
-                <td th:text="${note.inputDate}"></td>
-                <td th:text="${note.outputDate}"></td>
-                <td th:text="${note.totalAmount}"></td>
-                <td th:text="${note.comments}"></td>
-                <td><a th:href="@{/profiles/{id}/notes/{note-id}/update-note(id=${profile.id}, note-id=${note.id})}"><ion-icon name="create"></ion-icon></a>
-                    <a th:href="@{/profiles/{id}/notes/{note-id}/delete-note(id=${profile.id}, note-id=${note.id})}"><ion-icon name="trash"></ion-icon></a></td>
-            </tr>
-            <tr class="bg-success">
-                <td colspan="2">Total de registros</td>
-                <td colspan="4" th:text="${notes.size()}"></td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="card">
+        <div class="card-header">
+            <h3 th:text="${profile.completeName}"> - <span th:text="${profile.phone}"></span></h3>
+            <a th:href="@{/profiles/{id}/notes/new-note(id=${profile.id})}" class="btn btn-primary btn-lg">Nueva
+                Nota</a>
+        </div>
+        <div class="card-body">
+            <div th:if="${notes.isEmpty()}">No hay notas del usuario</div>
+            <div th:if="${!notes.isEmpty()}">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Numero Nota</th>
+                        <th scope="col">Fecha Entrada</th>
+                        <th scope="col">Fecha Salida</th>
+                        <th scope="col">Monto Total</th>
+                        <th scope="col">Comentario</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="note: ${notes}">
+                        <th th:text="${note.noteNumber}" scope="row"></th>
+                        <td th:text="${note.inputDate}"></td>
+                        <td th:text="${note.outputDate}"></td>
+                        <td th:text="${note.totalAmount}"></td>
+                        <td th:text="${note.comments}"></td>
+                        <td>
+                            <a th:href="@{/profiles/{id}/notes/{note-id}/update-note(id=${profile.id}, note-id=${note.id})}">
+                                <ion-icon name="create"></ion-icon>
+                            </a>
+                            <a th:href="@{/profiles/{id}/notes/{note-id}/delete-note(id=${profile.id}, note-id=${note.id})}">
+                                <ion-icon name="trash"></ion-icon>
+                            </a></td>
+                    </tr>
+                    <tr class="table-info">
+                        <td colspan="2">Total de registros</td>
+                        <td colspan="4" th:text="${notes.size()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 <footer th:replace="layout/layout :: footer"></footer>

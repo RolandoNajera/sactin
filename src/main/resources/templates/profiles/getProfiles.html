@@ -5,36 +5,46 @@
 <body>
 <header th:replace="layout/layout :: header"></header>
 <div class="container">
-    <a th:href="@{/profiles/create-profile}" class="btn btn-primary btn-lg">Nuevo Cliente</a>
-    <div th:if="${profiles.isEmpty()}">No hay usuarios en la lista</div>
-    <div th:if="${!profiles.isEmpty()}">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Correo</th>
-                <th scope="col">Telefono</th>
-                <th scope="col">Dirección</th>
-                <th scope="col">Acciones</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="profile: ${profiles}">
-                <th th:text="${profile.id}" scope="row"></th>
-                <td><a th:href="@{/profiles/{id}(id=${profile.id})}"><span th:text="${profile.completeName}"></span></a></td>
-                <td th:text="${profile.mail}"></td>
-                <td th:text="${profile.phone}"></td>
-                <td th:text="${profile.address}"></td>
-                <td><a th:href="@{/profiles/{id}/update-profile(id=${profile.id})}"><ion-icon name="create"></ion-icon></a>
-                    <a th:href="@{/profiles/{id}/delete-profile(id=${profile.id})}"><ion-icon name="trash"></ion-icon></a></td>
-            </tr>
-            <tr class="bg-success">
-                <td colspan="2">Total de registros</td>
-                <td colspan="4" th:text="${profiles.size()}"></td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="card">
+        <div class="card-header"><a th:href="@{/profiles/create-profile}" class="btn btn-primary btn-lg">Nuevo
+            Cliente</a></div>
+        <div class="card-body">
+            <div th:if="${profiles.isEmpty()}">No hay usuarios en la lista</div>
+            <div th:if="${!profiles.isEmpty()}">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Telefono</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="profile: ${profiles}">
+                        <th th:text="${profile.id}" scope="row"></th>
+                        <td><a th:href="@{/profiles/{id}(id=${profile.id})}"><span
+                                th:text="${profile.completeName}"></span></a></td>
+                        <td th:text="${profile.mail}"></td>
+                        <td th:text="${profile.phone}"></td>
+                        <td th:text="${profile.address}"></td>
+                        <td><a th:href="@{/profiles/{id}/update-profile(id=${profile.id})}">
+                            <ion-icon name="create"></ion-icon>
+                        </a>
+                            <a th:href="@{/profiles/{id}/delete-profile(id=${profile.id})}">
+                                <ion-icon name="trash"></ion-icon>
+                            </a></td>
+                    </tr>
+                    <tr class="table-info">
+                        <td colspan="2">Total de registros</td>
+                        <td colspan="4" th:text="${profiles.size()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 

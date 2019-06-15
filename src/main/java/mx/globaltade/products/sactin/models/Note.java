@@ -40,6 +40,7 @@ public class Note {
 
     public Note(Long id, String noteNumber, String inputDate, String outputDate, String totalAmount, String comments) {
         this.id = id;
+        this.noteNumber = noteNumber;
         this.inputDate = inputDate;
         this.outputDate = outputDate;
         this.totalAmount = totalAmount;
