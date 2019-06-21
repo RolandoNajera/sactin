@@ -24,15 +24,9 @@ public class ProfilesController {
 
     @RequestMapping(value = "/profiles", method = RequestMethod.GET)
     public String getProfiles(@RequestParam(name = "name", required = false) String name, Model model) {
-        model.addAttribute("title", "SACTIN");
-        model.addAttribute("initMessage", "Bienvenido a Sactin");
-        //return "index";
-//        System.out.println("llega aquí");
-//        model.addAttribute("profiles", profileService.getProfiles());
-//        System.out.println("llega aquí 2");
-//        model.addAttribute("title", title);
-//        System.out.println("llega aquí 3");
-      return "profiles/getProfiles";
+        model.addAttribute("profiles", profileService.getProfiles());
+        model.addAttribute("title", title);
+        return "profiles/getProfiles";
     }
 
     @RequestMapping(value = "/profiles", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
