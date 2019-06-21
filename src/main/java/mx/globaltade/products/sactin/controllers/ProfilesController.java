@@ -26,13 +26,13 @@ public class ProfilesController {
     public String getProfiles(@RequestParam(name = "name", required = false) String name, Model model) {
         model.addAttribute("title", "SACTIN");
         model.addAttribute("initMessage", "Bienvenido a Sactin");
-        return "index";
+        //return "index";
 //        System.out.println("llega aquí");
 //        model.addAttribute("profiles", profileService.getProfiles());
 //        System.out.println("llega aquí 2");
 //        model.addAttribute("title", title);
 //        System.out.println("llega aquí 3");
-//        return "profiles/getProfiles";
+      return "profiles/getProfiles";
     }
 
     @RequestMapping(value = "/profiles", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
