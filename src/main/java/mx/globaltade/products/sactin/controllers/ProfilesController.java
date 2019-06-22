@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class ProfilesController {
 
@@ -25,7 +27,8 @@ public class ProfilesController {
 
     @RequestMapping(value = "/profiles", method = RequestMethod.GET)
     public String getProfiles(@RequestParam(name = "name", required = false) String name, Model model) {
-        model.addAttribute("profiles", profileService.getProfiles());
+        List<Profile> profiles = profileService.getProfiles();
+        model.addAttribute("profiles", profiles);
         model.addAttribute("title", title);
         model.addAttribute("search", new SearchProfile());
         return "profiles/getProfiles";
@@ -35,6 +38,7 @@ public class ProfilesController {
     public String createProfile(Profile profile, Model model) {
         profileService.createProfile(profile);
         model.addAttribute("profiles", profileService.getProfiles());
+        model.addAttribute("search", new SearchProfile());
         return "profiles/getProfiles";
     }
 
@@ -49,6 +53,7 @@ public class ProfilesController {
     public String updateProfile(@PathVariable(name = "id") Long id, Profile profile, Model model) {
         profileService.updateProfile(profile);
         model.addAttribute("profiles", profileService.getProfiles());
+        model.addAttribute("search", new SearchProfile());
         return "profiles/getProfiles";
     }
 
@@ -56,6 +61,7 @@ public class ProfilesController {
     public String deleteProfile(@PathVariable(name = "id") Long id, Model model) {
         Boolean status = profileService.deleteProfile(id);
         model.addAttribute("profiles", profileService.getProfiles());
+        model.addAttribute("search", new SearchProfile());
         return "profiles/getProfiles";
     }
 
