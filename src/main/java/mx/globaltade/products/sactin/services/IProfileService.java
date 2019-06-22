@@ -9,6 +9,7 @@ public interface IProfileService {
     public Profile createProfile(Profile newProfile);
     public Profile updateProfile(Profile profile);
     public List<Profile> getProfiles();
+    public List<Profile> searchProfiles(String param);
     public Profile getProfile(Long profileKey);
     public boolean deleteProfile(Long profileKey);
 

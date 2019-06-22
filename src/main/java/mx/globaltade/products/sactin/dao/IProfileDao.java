@@ -7,6 +7,7 @@ import java.util.List;
 public interface IProfileDao {
 
     List<Profile> getAll();
+    List<Profile> searchProfiles(String param);
     Profile getProfile(Long key);
     Profile createProfile(Profile profile);
     Profile updateProfile(Profile profile);

@@ -23,6 +23,19 @@ public class ProfileDaoImpl implements IProfileDao {
 
     @Transactional(readOnly = true)
     @Override
+    public List<Profile> searchProfiles(String param) {
+        String hql = "from Profile p where p.completeName like '%" + param +
+                "%' OR p.mail like '%" + param +
+                "%' OR p.phone like '%" + param +
+                "%' OR p.address like '%" + param +
+                "%' order by p.completeName";
+        return em.createQuery(hql)
+                .setMaxResults(15)
+                .getResultList();
+    }
+
+    @Transactional(readOnly = true)
+    @Override
     public Profile getProfile(Long id) {
         return em.find(Profile.class, id);
     }

@@ -23,6 +23,10 @@ public class Note {
 
     private String outputDate;
 
+    private String deliveryDate;
+
+    private Long totalPieces;
+
     private String totalAmount;
 
     private String comments;
@@ -38,11 +42,13 @@ public class Note {
         super();
     }
 
-    public Note(Long id, String noteNumber, String inputDate, String outputDate, String totalAmount, String comments) {
+    public Note(Long id, String noteNumber, String inputDate, String outputDate, String deliveryDate, Long totalPieces, String totalAmount, String comments) {
         this.id = id;
         this.noteNumber = noteNumber;
         this.inputDate = inputDate;
         this.outputDate = outputDate;
+        this.deliveryDate = deliveryDate;
+        this.totalPieces = totalPieces;
         this.totalAmount = totalAmount;
         this.comments = comments;
     }
@@ -77,6 +83,22 @@ public class Note {
 
     public void setOutputDate(String outputDate) {
         this.outputDate = outputDate;
+    }
+
+    public String getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public void setDeliveryDate(String deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
+
+    public Long getTotalPieces() {
+        return totalPieces;
+    }
+
+    public void setTotalPieces(Long totalPieces) {
+        this.totalPieces = totalPieces;
     }
 
     public String getTotalAmount() {

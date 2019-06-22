@@ -1,6 +1,7 @@
 package mx.globaltade.products.sactin.controllers;
 
 import mx.globaltade.products.sactin.models.Profile;
+import mx.globaltade.products.sactin.modelviews.SearchProfile;
 import mx.globaltade.products.sactin.services.INoteService;
 import mx.globaltade.products.sactin.services.IProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class ProfilesController {
     public String getProfiles(@RequestParam(name = "name", required = false) String name, Model model) {
         model.addAttribute("profiles", profileService.getProfiles());
         model.addAttribute("title", title);
+        model.addAttribute("search", new SearchProfile());
         return "profiles/getProfiles";
     }
 
@@ -74,5 +76,14 @@ public class ProfilesController {
         model.addAttribute("deleteProfile", profileService.getProfile(id));
         return "profiles/deleteProfile";
     }
+
+    @RequestMapping(value = "/profiles/search-profile", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String createProfile(SearchProfile search, Model model) {
+        model.addAttribute("profiles", profileService.searchProfiles(search.getValue()));
+        model.addAttribute("title", title);
+        model.addAttribute("search", new SearchProfile());
+        return "profiles/getProfiles";
+    }
+
 
 }

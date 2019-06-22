@@ -21,6 +21,14 @@
             <input th:field="*{outputDate}" type="text" class="form-control" id="outputDate">
         </div>
         <div class="form-group">
+            <label for="deliveryDate">Fecha Entrega</label>
+            <input th:field="*{deliveryDate}" type="text" class="form-control" id="deliveryDate">
+        </div>
+        <div class="form-group">
+            <label for="totalPieces">Total Piezas</label>
+            <input th:field="*{totalPieces}" type="number" min="1" class="form-control" id="totalPieces">
+        </div>
+        <div class="form-group">
             <label for="totalAmount">Monto Total</label>
             <input th:field="*{totalAmount}" type="text" class="form-control" id="totalAmount" placeholder="0.0">
         </div>

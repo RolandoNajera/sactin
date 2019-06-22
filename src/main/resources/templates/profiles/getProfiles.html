@@ -9,7 +9,13 @@
         <div class="card-header"><a th:href="@{/profiles/create-profile}" class="btn btn-primary btn-lg">Nuevo
             Cliente</a></div>
         <div class="card-body">
-            <div th:if="${profiles.isEmpty()}">No hay usuarios en la lista</div>
+            <form class="form-inline" th:action="@{/profiles/search-profile}" th:object="${search}" th:method="post">
+                <div class="form-group">
+                    <input th:field="*{value}" type="text" class="form-control" id="phone" placeholder="Nombre, telefono, correo o dirección.">
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm mb-2">Buscar</button>
+            </form>
+            <div th:if="${profiles.isEmpty()}">No se encontraron clientes.</div>
             <div th:if="${!profiles.isEmpty()}">
                 <table class="table">
                     <thead>

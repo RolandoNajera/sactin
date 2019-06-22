@@ -31,6 +31,11 @@ public class ProfileServiceImpl implements IProfileService {
     }
 
     @Override
+    public List<Profile> searchProfiles(String param) {
+        return profileDao.searchProfiles(param);
+    }
+
+    @Override
     public Profile getProfile(Long profileKey) {
 
         return profileDao.getProfile(profileKey);
