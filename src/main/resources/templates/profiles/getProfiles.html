@@ -4,17 +4,33 @@
 </head>
 <body>
 <header th:replace="layout/layout :: header"></header>
-<div class="container">
+<div class="container-fluid">
     <div class="card">
-        <div class="card-header"><a th:href="@{/profiles/create-profile}" class="btn btn-primary btn-lg">Nuevo
-            Cliente</a></div>
-        <div class="card-body">
-            <form class="form-inline" th:action="@{/profiles/search-profile}" th:object="${search}" th:method="post">
-                <div class="form-group">
-                    <input th:field="*{value}" type="text" class="form-control" id="phone" placeholder="Nombre, telefono, correo o dirección.">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-6">
+                    <form class="form-inline" th:action="@{/profiles/search-profile}" th:object="${search}"
+                          th:method="post">
+                        <div class="input-group">
+                            <input th:field="*{value}" type="text" class="form-control"
+                                   placeholder="Nombre, telefono, correo o dirección."
+                                   aria-label="Nombre, telefono, correo o dirección." aria-describedby="search">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="submit" id="search">
+                                    <ion-icon name="search"></ion-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <button type="submit" class="btn btn-primary btn-sm mb-2">Buscar</button>
-            </form>
+                <div class="col-6">
+                    <a th:href="@{/profiles/create-profile}" class="btn btn-outline-primary">
+                        <ion-icon name="add-circle"></ion-icon>
+                        Nuevo cliente</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
             <div th:if="${profiles.isEmpty()}">No se encontraron clientes.</div>
             <div th:if="${!profiles.isEmpty()}">
                 <table class="table">
@@ -43,13 +59,12 @@
                                 <ion-icon name="trash"></ion-icon>
                             </a></td>
                     </tr>
-                    <tr class="table-info">
-                        <td colspan="2">Total de registros</td>
-                        <td colspan="4" th:text="${profiles.size()}"></td>
-                    </tr>
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div class="card-footer text-muted">
+            Total de registros : <span th:text="${profiles.size()}"></span>
         </div>
     </div>
 </div>

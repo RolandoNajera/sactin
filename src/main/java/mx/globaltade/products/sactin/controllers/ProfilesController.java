@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class ProfilesController {
 
-    @Value("${title}")
-    public String title;
-
     @Autowired
     public IProfileService profileService;
 
@@ -26,7 +23,6 @@ public class ProfilesController {
     @RequestMapping(value = "/profiles", method = RequestMethod.GET)
     public String getProfiles(@RequestParam(name = "name", required = false) String name, Model model) {
         model.addAttribute("profiles", profileService.getProfiles());
-        model.addAttribute("title", title);
         model.addAttribute("search", new SearchProfile());
         return "profiles/getProfiles";
     }
@@ -35,6 +31,7 @@ public class ProfilesController {
     public String createProfile(Profile profile, Model model) {
         profileService.createProfile(profile);
         model.addAttribute("profiles", profileService.getProfiles());
+        model.addAttribute("search", new SearchProfile());
         return "profiles/getProfiles";
     }
 
@@ -42,6 +39,7 @@ public class ProfilesController {
     public String getProfile(@PathVariable(name = "id") Long id, Model model) {
         model.addAttribute("profile", profileService.getProfile(id));
         model.addAttribute("notes", noteService.getNotesByProfile(id));
+        model.addAttribute("search", new SearchProfile());
         return "profiles/detailProfile";
     }
 
@@ -49,6 +47,7 @@ public class ProfilesController {
     public String updateProfile(@PathVariable(name = "id") Long id, Profile profile, Model model) {
         profileService.updateProfile(profile);
         model.addAttribute("profiles", profileService.getProfiles());
+        model.addAttribute("search", new SearchProfile());
         return "profiles/getProfiles";
     }
 
@@ -56,6 +55,7 @@ public class ProfilesController {
     public String deleteProfile(@PathVariable(name = "id") Long id, Model model) {
         Boolean status = profileService.deleteProfile(id);
         model.addAttribute("profiles", profileService.getProfiles());
+        model.addAttribute("search", new SearchProfile());
         return "profiles/getProfiles";
     }
 
@@ -80,7 +80,6 @@ public class ProfilesController {
     @RequestMapping(value = "/profiles/search-profile", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String createProfile(SearchProfile search, Model model) {
         model.addAttribute("profiles", profileService.searchProfiles(search.getValue()));
-        model.addAttribute("title", title);
         model.addAttribute("search", new SearchProfile());
         return "profiles/getProfiles";
     }

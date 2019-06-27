@@ -2,6 +2,7 @@ package mx.globaltade.products.sactin.controllers;
 
 import mx.globaltade.products.sactin.models.Note;
 import mx.globaltade.products.sactin.models.Profile;
+import mx.globaltade.products.sactin.modelviews.SearchProfile;
 import mx.globaltade.products.sactin.services.INoteService;
 import mx.globaltade.products.sactin.services.IProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,7 @@ public class NotesController {
         noteService.createNote(note);
         model.addAttribute("notes", noteService.getNotesByProfile(id));
         model.addAttribute("profile", profile);
+        model.addAttribute("search", new SearchProfile());
         return "profiles/detailProfile";
     }
 

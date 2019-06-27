@@ -7,9 +7,31 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h3 th:text="${profile.completeName}"> - <span th:text="${profile.phone}"></span></h3>
-            <a th:href="@{/profiles/{id}/notes/new-note(id=${profile.id})}" class="btn btn-primary btn-lg">Nueva
-                Nota</a>
+            <div class="row">
+                <div class="col-4">
+                    <span th:text="${profile.completeName}"></span>
+                </div>
+                <div class="col-4">
+                    <a th:href="@{/profiles/{id}/notes/new-note(id=${profile.id})}" class="btn btn-outline-primary">
+                        <ion-icon name="add-circle"></ion-icon>
+                        Nueva nota</a>
+                </div>
+                <div class="col-4">
+                    <form class="form-inline" th:action="@{/notes/search-note}" th:object="${search}"
+                          th:method="post">
+                        <div class="input-group">
+                            <input th:field="*{value}" type="text" class="form-control"
+                                   placeholder="Número nota"
+                                   aria-label="Número nota" aria-describedby="search">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="submit" id="search">
+                                    <ion-icon name="search"></ion-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
         <div class="card-body">
             <div th:if="${notes.isEmpty()}">No hay notas del usuario</div>

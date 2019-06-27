@@ -4,29 +4,40 @@
 </head>
 <body>
 <header th:replace="layout/layout :: header"></header>
-<div class="container">
-    <h1>Nuevo Cliente</h1>
-    <form th:action="@{/profiles}" th:object="${newProfile}" th:method="post">
-        <div class="form-group">
-            <label for="name">Nombre</label>
-            <input th:field="*{completeName}" type="text" class="form-control" id="name" placeholder="Nombre completo">
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            Nuevo Cliente
         </div>
-        <div class="form-group">
-            <label for="email">Correo</label>
-            <input th:field="*{mail}" type="email" class="form-control" id="email" placeholder="Correo electrónico">
+        <div class="card-body">
+            <form th:action="@{/profiles}" th:object="${newProfile}" th:method="post">
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input th:field="*{completeName}" type="text" class="form-control" id="name"
+                           placeholder="Nombre completo">
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo</label>
+                    <input th:field="*{mail}" type="email" class="form-control" id="email"
+                           placeholder="Correo electrónico">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Teléfono</label>
+                    <input th:field="*{phone}" type="text" class="form-control" id="phone"
+                           placeholder="Teléfono celular">
+                </div>
+                <div class="form-group">
+                    <label for="address">Dirección</label>
+                    <input th:field="*{address}" type="text" class="form-control" id="address"
+                           placeholder="Dirección completa">
+                </div>
+                <input type="submit" class="btn btn-primary" value="Crear">
+                <input class="btn btn-info" type="reset" value="Borrar">
+                <input type="hidden" th:field="*{id}"><br>
+                <input type="hidden" th:field="*{createAt}"><br>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="phone">Teléfono</label>
-            <input th:field="*{phone}" type="text" class="form-control" id="phone" placeholder="Teléfono celular">
-        </div>
-        <div class="form-group">
-            <label for="address">Dirección</label>
-            <input th:field="*{address}" type="text" class="form-control" id="address" placeholder="Dirección completa">
-        </div>
-        <input type="hidden" th:field="*{id}"><br>
-        <input type="hidden" th:field="*{createAt}"><br>
-        <input type="submit" class="btn btn-primary" value="Crear">
-    </form>
+    </div>
 </div>
 <footer th:replace="layout/layout :: footer"></footer>
 </body>

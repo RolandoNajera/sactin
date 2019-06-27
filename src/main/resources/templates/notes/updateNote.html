@@ -39,6 +39,8 @@
         <input type="hidden" th:field="*{id}"><br>
         <input type="hidden" th:field="*{createAt}"><br>
         <input type="submit" class="btn btn-primary" value="Actualizar">
+        <input class="btn btn-info" type="reset" value="Borrar">
+        <a th:href="@{/profiles/{id}(id=${profile.id})}" class="btn btn-warning">Cancelar</a>
     </form>
 </div>
 <footer th:replace="layout/layout :: footer"></footer>

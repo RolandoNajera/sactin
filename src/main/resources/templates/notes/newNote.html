@@ -4,47 +4,56 @@
 </head>
 <body>
 <header th:replace="layout/layout :: header"></header>
-<div class="container">
-    <h1>Nueva nota</h1>
-    <form th:action="@{/profiles/{id}/notes(id=${profile.id})}" th:object="${newNote}" th:method="post">
-        <div class="form-group">
-            <label for="noteNumber">Número Nota</label>
-            <input th:field="*{noteNumber}" type="text" class="form-control" id="noteNumber">
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            Nueva nota - <span th:text="${profile.completeName}"></span>
         </div>
-        <div class="form-group">
-            <label for="inputDate">Fecha Entrada</label>
-            <input th:field="*{inputDate}" type="text" class="form-control" id="inputDate">
+        <div class="card-body">
+            <form th:action="@{/profiles/{id}/notes(id=${profile.id})}" th:object="${newNote}" th:method="post">
+                <div class="form-group">
+                    <label for="noteNumber">Número Nota</label>
+                    <input th:field="*{noteNumber}" type="text" class="form-control" id="noteNumber">
+                </div>
+                <div class="form-group">
+                    <label for="inputDate">Fecha Entrada</label>
+                    <input th:field="*{inputDate}" type="text" class="form-control" id="inputDate">
+                </div>
+                <div class="form-group">
+                    <label for="outputDate">Fecha Salida</label>
+                    <input th:field="*{outputDate}" type="text" class="form-control" id="outputDate">
+                </div>
+                <div class="form-group">
+                    <label for="deliveryDate">Fecha Entrega</label>
+                    <input th:field="*{deliveryDate}" type="text" class="form-control" id="deliveryDate">
+                </div>
+                <div class="form-group">
+                    <label for="totalPieces">Total Piezas</label>
+                    <input th:field="*{totalPieces}" type="number" min="1" class="form-control" id="totalPieces">
+                </div>
+                <div class="form-group">
+                    <label for="totalAmount">Monto Total</label>
+                    <input th:field="*{totalAmount}" type="text" class="form-control" id="totalAmount"
+                           placeholder="0.0">
+                </div>
+                <div class="form-group">
+                    <label for="comments">Comentario</label>
+                    <input th:field="*{comments}" type="text" class="form-control" id="comments"
+                           placeholder="Algún comentario">
+                </div>
+                <input type="hidden" th:field="*{createAt}">
+                <input type="submit" class="btn btn-primary" value="Crear">
+                <input class="btn btn-info" type="reset" value="Borrar">
+                <a th:href="@{/profiles/{id}(id=${profile.id})}" class="btn btn-warning">Cancelar</a>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="outputDate">Fecha Salida</label>
-            <input th:field="*{outputDate}" type="text" class="form-control" id="outputDate">
-        </div>
-        <div class="form-group">
-            <label for="deliveryDate">Fecha Entrega</label>
-            <input th:field="*{deliveryDate}" type="text" class="form-control" id="deliveryDate">
-        </div>
-        <div class="form-group">
-            <label for="totalPieces">Total Piezas</label>
-            <input th:field="*{totalPieces}" type="number" min="1" class="form-control" id="totalPieces">
-        </div>
-        <div class="form-group">
-            <label for="totalAmount">Monto Total</label>
-            <input th:field="*{totalAmount}" type="text" class="form-control" id="totalAmount" placeholder="0.0">
-        </div>
-        <div class="form-group">
-            <label for="comments">Comentario</label>
-            <input th:field="*{comments}" type="text" class="form-control" id="comments" placeholder="Algún comentario">
-        </div>
-        <input type="hidden" th:field="*{createAt}">
-        <input type="submit" class="btn btn-primary" value="Crear">
-    </form>
-</div>
-<footer th:replace="layout/layout :: footer"></footer>
+    </div>
+    <footer th:replace="layout/layout :: footer"></footer>
 
-<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker1').datetimepicker();
-    });
-</script>
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker();
+        });
+    </script>
 </body>
 </html>
