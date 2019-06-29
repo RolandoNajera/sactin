@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head th:fragment="head">
         <meta charset="UTF-8"/>
         <title th:text="SACTIN"></title>
@@ -11,19 +12,39 @@
     <body>
         <header th:fragment="header">
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-                <a class="navbar-brand" th:href="@{/profiles}">Sactin</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <a class="navbar-brand" th:href="@{/}">Sactin App 1.0</a>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" th:href="@{/profiles}">Clientes
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                    </ul>
+                </div>
+                <div class="d-flex flex-row justify-content-end">
+                    <div class="bg-primary">
+                        <div sec:authorize="isAuthenticated()">
+                            <p class="font-weight-bold">Hola <span sec:authentication="name"></span>!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="bg-primary">
+                        <button class="btn btn-primary" type="button">
+                            <ion-icon name="notifications"
+                                      style="font-size: 30px; color:aliceblue; cursor: pointer;"></ion-icon>
+                        </button>
+                    </div>
+                    <div class="bg-primary">
+                        <button class="btn btn-primary" type="button">
+                            <ion-icon name="person"
+                                      style="font-size: 30px; color:aliceblue; cursor: pointer;"></ion-icon>
+                        </button>
+                    </div>
+                    <div class="bg-primary">
+                        <div sec:authorize="isAuthenticated()">
+                            <form id="logoutForm" th:action="@{/logout}" method="post">
+                                <button class="btn btn-primary" onclick="document.getElementById('logoutForm').submit"
+                                        type="submit">
+                                    <ion-icon name="log-out"
+                                              style="font-size: 30px; color:aliceblue; cursor: pointer;"></ion-icon>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </nav>
         </header>

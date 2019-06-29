@@ -4,9 +4,11 @@ import mx.globaltade.products.sactin.models.Profile;
 import mx.globaltade.products.sactin.modelviews.SearchProfile;
 import mx.globaltade.products.sactin.services.INoteService;
 import mx.globaltade.products.sactin.services.IProfileService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +18,15 @@ import java.util.List;
 @Controller
 public class ProfilesController {
 
+    protected final Log logger = LogFactory.getLog(this.getClass());
+
     @Autowired
     public IProfileService profileService;
 
     @Autowired
     public INoteService noteService;
 
-    @RequestMapping(value = "/profiles", method = RequestMethod.GET)
+    @RequestMapping(value = {"/profiles", "/"}, method = RequestMethod.GET)
     public String getProfiles(@RequestParam(name = "name", required = false) String name, Model model) {
         model.addAttribute("profiles", profileService.getProfiles());
         model.addAttribute("search", new SearchProfile());

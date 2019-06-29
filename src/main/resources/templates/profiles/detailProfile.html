@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout :: head">
 </head>
 <body>
@@ -46,7 +47,7 @@
                         <th scope="col">Total Piezas</th>
                         <th scope="col">Monto Total</th>
                         <th scope="col">Comentario</th>
-                        <th scope="col">Acciones</th>
+                        <th scope="col" sec:authorize="hasRole('ADMIN')">Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -58,7 +59,7 @@
                         <td th:text="${note.totalPieces}"></td>
                         <td th:text="${note.totalAmount}"></td>
                         <td th:text="${note.comments}"></td>
-                        <td>
+                        <td sec:authorize="hasRole('ADMIN')">
                             <a th:href="@{/profiles/{id}/notes/{note-id}/update-note(id=${profile.id}, note-id=${note.id})}">
                                 <ion-icon name="create"></ion-icon>
                             </a>

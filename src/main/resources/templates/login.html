@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col align-self-start">
+        </div>
+        <div class="col align-self-center">
+            <div class="card">
+                <div class="card-header">
+                    <div th:if="${errorMessage != null}" class="alert alert-danger" role="alert">
+                        Error al iniciar sesión
+                    </div>
+                    Iniciar Sesión
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/login}" method="post">
+                        <div class="form-group">
+                            <label for="username">Usuario</label>
+                            <input type="text" class="form-control" name="username" id="username" placeholder="Usuario" autofocus required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Contraseña</label>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Entrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col align-self-end">
+        </div>
+    </div>
+</div>
+<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
