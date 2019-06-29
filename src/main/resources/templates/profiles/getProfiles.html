@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout :: head">
 </head>
 <body>
@@ -36,23 +37,22 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Correo</th>
                         <th scope="col">Telefono</th>
                         <th scope="col">Dirección</th>
-                        <th scope="col">Acciones</th>
+                        <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="profile: ${profiles}">
-                        <th th:text="${profile.id}" scope="row"></th>
                         <td><a th:href="@{/profiles/{id}(id=${profile.id})}"><span
                                 th:text="${profile.completeName}"></span></a></td>
                         <td th:text="${profile.mail}"></td>
                         <td th:text="${profile.phone}"></td>
                         <td th:text="${profile.address}"></td>
-                        <td><a th:href="@{/profiles/{id}/update-profile(id=${profile.id})}">
+                        <td sec:authorize="hasRole('ADMIN')"><a
+                                th:href="@{/profiles/{id}/update-profile(id=${profile.id})}">
                             <ion-icon name="create"></ion-icon>
                         </a>
                             <a th:href="@{/profiles/{id}/delete-profile(id=${profile.id})}">

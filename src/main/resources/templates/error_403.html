@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+</head>
+<body>
+<header th:replace="layout/layout :: header"></header>
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">Error de acceso denegado</div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Lo sentimos <span th:text="${#authentication.name}" class="font-weight-bold"></span> no tienes permisos para acceder a esta página.
+            </h5>
+            <a th:href="@{/}" class="btn btn-outline-warning" role="button">Regresar</a>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="layout/layout :: footer">
+</footer>
+</body>
+</html>
