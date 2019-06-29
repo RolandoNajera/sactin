@@ -18,9 +18,15 @@
                 <div class="d-flex flex-row justify-content-end">
                     <div class="bg-primary">
                         <div sec:authorize="isAuthenticated()">
-                            <p class="font-weight-bold">Hola <span sec:authentication="name"></span>!
+                            <p class="font-weight-bold">Hola<span sec:authentication="name"></span>!
                             </p>
                         </div>
+                    </div>
+                    <div class="bg-primary" sec:authorize="hasRole('ADMIN')">
+                        <button class="btn btn-primary" type="button">
+                            <ion-icon name="pulse"
+                                      style="font-size: 30px; color:aliceblue; cursor: pointer;"></ion-icon>
+                        </button>
                     </div>
                     <div class="bg-primary">
                         <button class="btn btn-primary" type="button">
